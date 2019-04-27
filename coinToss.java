@@ -7,6 +7,7 @@ import java.util.Queue;
 import java.util.Arrays;
 import java.lang.Integer;
 import java.io.File;
+import java.lang.Math;
 import java.util.concurrent.ThreadLocalRandom;
 /*
  @Author: Edson ZAndamela
@@ -17,6 +18,17 @@ public class coinToss {
 	//Variables
 	static int maxRounds = 0;
 
+	//Methods
+	public static int randomGen(int min, int max){
+		int range = max - min + 1;
+		int rand = 0; 
+		// generate random numbers within 1 to 2 
+		for (int i = 0; i < 1; i++) { 
+			rand = (int)(Math.random() * range) + min;
+		}  
+		return rand;
+	}
+	
 
 	public static void main(String[]args){
 		Scanner keyBoard = new Scanner(System.in);	//Call keyboard for input
@@ -38,6 +50,10 @@ public class coinToss {
 				if(maxRounds % 2 == 0){
 					System.out.println("Error!!! Please enter an odd number");
 				}else{	//if its odd
+					/*Check for winner
+					* like while either winner is < =  total maxrounds
+					* continue to play, otherwise declare winner.	
+					*/
 					System.out.println("maxRounds is: " + maxRounds);	//print for testing
 					System.out.println("\n \t1. Choose '1' for heads or '2' for tails");	//prompt for input
 					headsOrTails = keyBoard.nextInt();		//scan for input
@@ -49,6 +65,9 @@ public class coinToss {
 					}else{
 						System.out.println("Error!!! Enter a Valid Option");
 					}
+					//MAke computer throw an integer - 1 or 2
+					int pcThrow = randomGen(1,2); 
+			        System.out.println("Computer has: " + pcThrow);
 				}
 				System.out.println();		//Get some space
 				System.out.println();		//Get some space
