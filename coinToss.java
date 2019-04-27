@@ -20,7 +20,8 @@ public class coinToss {
 
 	public static void main(String[]args){
 		Scanner keyBoard = new Scanner(System.in);	//Call keyboard for input
-		int select = 0;								//Stores Menu selection input
+		int select = 0;
+		int headsOrTails;								//Stores Menu selection input
 
 		while(select!= 2){
 			System.out.println("\n**********Welcome to Coin Toss Game***********");
@@ -35,9 +36,19 @@ public class coinToss {
 				System.out.println("Enter an odd number to serve as the maximum number of rounds");	//prompt for number
 				maxRounds = keyBoard.nextInt();		//Store number in var
 				if(maxRounds % 2 == 0){
-					//System.out.println("Invalid input, please enter an odd number");
-				}else{
-					System.out.println("maxRounds is: " + maxRounds);
+					System.out.println("Error!!! Please enter an odd number");
+				}else{	//if its odd
+					System.out.println("maxRounds is: " + maxRounds);	//print for testing
+					System.out.println("\n \t1. Choose '1' for heads or '2' for tails");	//prompt for input
+					headsOrTails = keyBoard.nextInt();		//scan for input
+					//keyBoard.nextLine();
+					if(headsOrTails == 1){
+						System.out.println("You selected heads");
+					}else if(headsOrTails == 2){
+						System.out.println("You selected Tails");
+					}else{
+						System.out.println("Error!!! Enter a Valid Option");
+					}
 				}
 				System.out.println();		//Get some space
 				System.out.println();		//Get some space
@@ -49,5 +60,6 @@ public class coinToss {
 			}
 			System.out.println();		//Get some space
 		}//End of while
-	}
+		//System.out.println("maxRounds in main is: " + maxRounds);
+	}//End of Main
 }
