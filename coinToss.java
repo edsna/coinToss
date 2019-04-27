@@ -96,7 +96,12 @@ public class coinToss {
 			        	System.out.println("You won this round!!!");
 			        	userWins++;
 			        }
-			        //update maxRounds = maxRounds -1;
+			        System.out.println("Scoreboard's state is: " );
+			        System.out.println("\n \t**********Scoreboard State***********");
+					System.out.println("\n \tComputer: " + compWins);
+					System.out.println("\n \tUser: " + userWins);
+					maxRounds = maxRounds -1;	//Updates number of rounds left
+					System.out.println("\n \tNumber of rounds left: " + maxRounds);
 				}
 				System.out.println();		//Get some space
 				System.out.println();		//Get some space
