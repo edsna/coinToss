@@ -48,6 +48,19 @@ public class coinToss {
 		}
 	}
 
+	/*
+	 *Determines who is the winner for the game
+	 *@ret: Returns 0 if computer wins and 1 if user wins
+	 *@param: computer and user's winns
+	*/
+	public static int gameWinner(int compW, int userW){
+		if(compW > userW){
+			return 0;
+		}else{
+			return 1;
+		}
+	}
+
 
 
 	public static void main(String[]args){
@@ -74,6 +87,7 @@ public class coinToss {
 					* like while either winner is < =  total maxrounds
 					* continue to play, otherwise declare winner.	
 					*/
+					while(maxRounds > (maxRounds/2)){
 					System.out.println("maxRounds is: " + maxRounds);	//print for testing
 					System.out.println("\n \t1. Choose '1' for heads or '2' for tails");	//prompt for input
 					headsOrTails = keyBoard.nextInt();		//scan for input
@@ -92,16 +106,26 @@ public class coinToss {
 			        if(result == 0){
 			        	System.out.println("You lost this round!");
 			        	compWins++;
+			        	maxRounds = maxRounds -1;	//Updates number of rounds left
 			        }else{
 			        	System.out.println("You won this round!!!");
 			        	userWins++;
+			        	maxRounds = maxRounds -1;	//Updates number of rounds left
 			        }
 			        System.out.println("Scoreboard's state is: " );
 			        System.out.println("\n \t**********Scoreboard State***********");
 					System.out.println("\n \tComputer: " + compWins);
 					System.out.println("\n \tUser: " + userWins);
-					maxRounds = maxRounds -1;	//Updates number of rounds left
 					System.out.println("\n \tNumber of rounds left: " + maxRounds);
+					}
+					//call function to compare winners
+					int gameW = gameWinner(compWins, userWins);
+					//declare winners
+					if(gameW == 0){
+						System.out.println("\n \t You Lost this game!!!");
+					}else{
+						System.out.println("\n \t You Win this game!!!!");
+					}
 				}
 				System.out.println();		//Get some space
 				System.out.println();		//Get some space
@@ -111,6 +135,7 @@ public class coinToss {
 			}else{
 				System.out.println("Error!!! Enter a Valid Option");
 			}
+			//NEED TO MAKE SURE IT DECLARES WINNER RIGHT AFTER MAXROUNDS < MAXROUNDS/2
 			System.out.println();		//Get some space
 		}//End of while
 		//System.out.println("maxRounds in main is: " + maxRounds);
