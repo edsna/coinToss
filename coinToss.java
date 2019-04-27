@@ -17,8 +17,14 @@ import java.util.concurrent.ThreadLocalRandom;
 public class coinToss {
 	//Variables
 	static int maxRounds = 0;
+	static int userWins = 0;
+	static int compWins = 0;
 
-	//Methods
+	/*
+	 *Generates random number between 1 and 2
+	 *@ret: Returns 1 or two for heards or tails
+	 *@param: takes minimum and maximum numbers to be generated
+	*/
 	public static int randomGen(int min, int max){
 		int range = max - min + 1;
 		int rand = 0; 
@@ -28,7 +34,21 @@ public class coinToss {
 		}  
 		return rand;
 	}
-	
+
+	/*
+	 *Determines who is the winner for every single game
+	 *@ret: Returns 0 if computer wins and 1 if user wins
+	 *@param: computer's throw and user's guess
+	*/
+	public static int roundWinner(int compThrow, int userGuess){
+		if(compThrow == userGuess){
+			return 1;
+		}else{
+			return 0;
+		}
+	}
+
+
 
 	public static void main(String[]args){
 		Scanner keyBoard = new Scanner(System.in);	//Call keyboard for input
@@ -68,6 +88,15 @@ public class coinToss {
 					//MAke computer throw an integer - 1 or 2
 					int pcThrow = randomGen(1,2); 
 			        System.out.println("Computer has: " + pcThrow);
+			        int result = roundWinner(pcThrow, headsOrTails);
+			        if(result == 0){
+			        	System.out.println("You lost this round!");
+			        	compWins++;
+			        }else{
+			        	System.out.println("You won this round!!!");
+			        	userWins++;
+			        }
+			        //update maxRounds = maxRounds -1;
 				}
 				System.out.println();		//Get some space
 				System.out.println();		//Get some space
