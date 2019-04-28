@@ -64,8 +64,6 @@ public class coinToss {
 		}
 	}
 
-
-
 	public static void main(String[]args){
 		Scanner keyBoard = new Scanner(System.in);	//Call keyboard for input
 		int select = 0;
@@ -83,9 +81,8 @@ public class coinToss {
 			if(select == 1){
 				System.out.println("Enter an odd number to serve as the maximum number of rounds");	//prompt for number
 				maxRounds = keyBoard.nextInt();		//Store number in var
-				if(maxRounds % 2 == 0){
-					System.out.println("Error!!! Please enter an odd number");
-				}else{	//if its odd
+				if(!(maxRounds % 2 == 0) && maxRounds > 0){
+					//if its odd
 					/*Check for winner
 					* like while either winner is < =  total maxrounds
 					* continue to play, otherwise declare winner.	
@@ -139,6 +136,9 @@ public class coinToss {
 						//compWins = userWins;
 					}
 					*/
+
+				}else{	
+					System.out.println("Error!!! Please enter an odd number");
 				}
 				System.out.println();		//Get some space
 				System.out.println();		//Get some space
