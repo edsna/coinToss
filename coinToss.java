@@ -56,8 +56,11 @@ public class coinToss {
 	public static int gameWinner(int compW, int userW){
 		if(compW > userW){
 			return 0;
-		}else{
+		}else if(compW < userW){
 			return 1;
+		}
+		else{
+			return 5;
 		}
 	}
 
@@ -86,8 +89,9 @@ public class coinToss {
 					/*Check for winner
 					* like while either winner is < =  total maxrounds
 					* continue to play, otherwise declare winner.	
+					* && !(compWins == userWins)
 					*/
-					while(maxRounds > (maxRounds/2)){
+					while(!(compWins > maxRounds/2) && !(userWins > maxRounds/2)){
 					System.out.println("maxRounds is: " + maxRounds);	//print for testing
 					System.out.println("\n \t1. Choose '1' for heads or '2' for tails");	//prompt for input
 					headsOrTails = keyBoard.nextInt();		//scan for input
@@ -123,9 +127,18 @@ public class coinToss {
 					//declare winners
 					if(gameW == 0){
 						System.out.println("\n \t You Lost this game!!!");
-					}else{
+						compWins = 0;
+						userWins = 0;
+					}else if(gameW == 1){
 						System.out.println("\n \t You Win this game!!!!");
+						compWins = 0;
+						userWins = 0;
 					}
+					/*else{
+						//System.out.println("\n \t Testing Tie");
+						//compWins = userWins;
+					}
+					*/
 				}
 				System.out.println();		//Get some space
 				System.out.println();		//Get some space
@@ -138,6 +151,6 @@ public class coinToss {
 			//NEED TO MAKE SURE IT DECLARES WINNER RIGHT AFTER MAXROUNDS < MAXROUNDS/2
 			System.out.println();		//Get some space
 		}//End of while
-		//System.out.println("maxRounds in main is: " + maxRounds);
+		System.out.println("Should exit to Main Menu here!");
 	}//End of Main
 }
