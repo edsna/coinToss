@@ -19,6 +19,7 @@ public class coinToss {
 	static int maxRounds = 0;
 	static int userWins = 0;
 	static int compWins = 0;
+	static int totalRounds = 0;
 
 	/*
 	 *Generates random number between 1 and 2
@@ -88,20 +89,26 @@ public class coinToss {
 			System.out.println("\n \t1. Enter 1 to start game");
 			System.out.println("\n \t2. Enter 2 to return to main Menu");
 			System.out.println("Select an option from the Menu");
-			
+			/*
 			if(keyBoard.hasNextInt()){
 	        	select = keyBoard.nextInt();
 		    }else{
 		        System.out.println("Error!! Invalid input");
 		    }
 		    System.out.println("Testeee");
-			//select = keyBoard.nextInt();
-			//keyBoard.nextLine();
+		    */
+			select = keyBoard.nextInt();
+			keyBoard.nextLine();
 			if(select == 1){
 				System.out.println("Enter an odd number to serve as the maximum number of rounds");	//prompt for number
-				maxRounds = keyBoard.nextInt();		//Store number in var
+				totalRounds = keyBoard.nextInt();		//Store number in var
+				System.out.println("Total Rounds has: " + totalRounds);
+				maxRounds = totalRounds;				//Copy total number of rounds to update game
+				System.out.println("Total Rounds has: " + totalRounds);
+				System.out.println("Max Rounds has: " + maxRounds);
+
 				if(validateInput(maxRounds)){
-					while(!(compWins > maxRounds/2) && !(userWins > maxRounds/2)){
+					while(!(compWins > totalRounds/2) && !(userWins > totalRounds/2)){
 					//System.out.println("maxRounds is: " + maxRounds);	//print for testing
 					System.out.println("\n \t1. Choose '1' for heads or '2' for tails");	//prompt for input
 					headsOrTails = keyBoard.nextInt();		//scan for input
@@ -131,6 +138,8 @@ public class coinToss {
 					System.out.println("\n \tComputer: " + compWins);
 					System.out.println("\n \tUser: " + userWins);
 					System.out.println("\n \tNumber of rounds left: " + maxRounds);
+					System.out.println("\n \tTotal Rounds has: " + totalRounds);
+					System.out.println("\n \tMax Rounds has: " + maxRounds);
 					}
 					//call function to compare winners
 					int gameW = gameWinner(compWins, userWins);
