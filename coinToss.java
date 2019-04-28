@@ -64,6 +64,19 @@ public class coinToss {
 		}
 	}
 
+	/*
+	 *Determines if input is even or odd & validates it
+	 *@ret: Returns true if input is odd and false otherwise
+	 *@param: input
+	*/
+	public static boolean validateInput(int maxRounds){
+		if((maxRounds % 2 == 0) || (maxRounds <= 0)){
+			return false;
+		}else{
+			return true;
+		}
+	}
+
 	public static void main(String[]args){
 		Scanner keyBoard = new Scanner(System.in);	//Call keyboard for input
 		int select = 0;
@@ -75,21 +88,21 @@ public class coinToss {
 			System.out.println("\n \t1. Enter 1 to start game");
 			System.out.println("\n \t2. Enter 2 to return to main Menu");
 			System.out.println("Select an option from the Menu");
-
-			select = keyBoard.nextInt();
-			keyBoard.nextLine();
+			
+			if(keyBoard.hasNextInt()){
+	        	select = keyBoard.nextInt();
+		    }else{
+		        System.out.println("Error!! Invalid input");
+		    }
+		    System.out.println("Testeee");
+			//select = keyBoard.nextInt();
+			//keyBoard.nextLine();
 			if(select == 1){
 				System.out.println("Enter an odd number to serve as the maximum number of rounds");	//prompt for number
 				maxRounds = keyBoard.nextInt();		//Store number in var
-				if(!(maxRounds % 2 == 0) && maxRounds > 0){
-					//if its odd
-					/*Check for winner
-					* like while either winner is < =  total maxrounds
-					* continue to play, otherwise declare winner.	
-					* && !(compWins == userWins)
-					*/
+				if(validateInput(maxRounds)){
 					while(!(compWins > maxRounds/2) && !(userWins > maxRounds/2)){
-					System.out.println("maxRounds is: " + maxRounds);	//print for testing
+					//System.out.println("maxRounds is: " + maxRounds);	//print for testing
 					System.out.println("\n \t1. Choose '1' for heads or '2' for tails");	//prompt for input
 					headsOrTails = keyBoard.nextInt();		//scan for input
 					//keyBoard.nextLine();
@@ -131,11 +144,11 @@ public class coinToss {
 						compWins = 0;
 						userWins = 0;
 					}
-					/*else{
+					else{
 						//System.out.println("\n \t Testing Tie");
 						//compWins = userWins;
 					}
-					*/
+					
 
 				}else{	
 					System.out.println("Error!!! Please enter an odd number");
