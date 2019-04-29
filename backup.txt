@@ -16,11 +16,11 @@ import java.util.concurrent.ThreadLocalRandom;
 */
 public class coinToss {
 	//Variables
-	static int updatedRounds = 0;	//stores updates of total round after every round
-	static int userWins = 0;		//Stores number of user wins/victories
-	static int compWins = 0;		//Stores number of computer wins/victories
-	static int totalRounds = 0;		//Stores total number of rounds
-	static int inputVal = 0;
+	static int maxRounds = 0;
+	static int userWins = 0;
+	static int compWins = 0;
+	static int totalRounds = 0;
+
 	/*
 	 *Generates random number between 1 and 2
 	 *@ret: Returns 1 or two for heards or tails
@@ -35,8 +35,9 @@ public class coinToss {
 		}  
 		return rand;
 	}
+
 	/*
-	 *Determines who is the winner for every single round
+	 *Determines who is the winner for every single game
 	 *@ret: Returns 0 if computer wins and 1 if user wins
 	 *@param: computer's throw and user's guess
 	*/
@@ -47,10 +48,11 @@ public class coinToss {
 			return 0;
 		}
 	}
+
 	/*
-	 *Determines who is the winner for all the rounds
+	 *Determines who is the winner for the game
 	 *@ret: Returns 0 if computer wins and 1 if user wins
-	 *@param: compW and userW
+	 *@param: computer and user's winns
 	*/
 	public static int gameWinner(int compW, int userW){
 		if(compW > userW){
@@ -62,68 +64,48 @@ public class coinToss {
 			return 5;
 		}
 	}
+
 	/*
-	 *Determines if input is valid 
-	 *@ret: Returns 
-	 *@param: 
+	 *Determines if input is valid and throws computer's toss
+	 *@ret: Returns true if input is odd and false otherwise
+	 *@param: input
 	*/
-	public static void headsOrTailsPick() throws InputMismatchException{
-		inputVal = 0;	//Stores input
-		Scanner scan = new Scanner(System.in);
-		while (inputVal != 1 || inputVal != 2){
-			try { 
-				System.out.println("Choose '1' for heads or '2' for tails: ");
-			    inputVal = scan.nextInt();}
-			catch (InputMismatchException e){
-				System.out.println("Error!! Invalid input type.Please try again.");
-			}
-			if (inputVal>2 || inputVal<1){
-				System.out.println("The number you entered isn't a valid option.");
-			  }
-		}
+	public static boolean validInput(int selection){
+		
+		Scanner keyb = new Scanner(System.in);
+      	System.out.print("Please enter your age: ");
+      	int a = keyboard.nextInt();
+      	verifyAge(a);
+
+      	try{
+      		select = keyBoard.nextInt();
+			keyBoard.nextLine();
+         }catch (InputMismatchException e)
+         {
+            System.out.println("You may only enter integers as an age. Try again.");
+            getAge();
+         }
+          
+       return a;
 	}
-	/*
-	 *Determines if input selection is valid 
-	 *@ret: Returns 
-	 *@param: 
-	*/
-	/*
-	public static void selectionInputPick() throws InputMismatchException{
-		selectVal = 0;	//Stores input
-		Scanner scan = new Scanner(System.in);
-		while (selectVal != 1 || selectVal != 2){
-			try { 
-			System.out.println("\n \t1. Enter 1 to start game");
-			System.out.println("\n \t2. Enter 2 to return to main Menu");
-			System.out.println("Select an option from the Menu");
-			    selectVal = scan.nextInt();}
-			catch (InputMismatchException e){
-				System.out.println("Error!! Invalid input type.Please try again.");
-			}
-			if (selectVal>2 || selectVal<1){
-				System.out.println("The number you entered isn't a valid option.");
-			  }
-		}
-	}
-	*/
+	
+
 	/*
 	 *Determines if input is even or odd & validates it
 	 *@ret: Returns true if input is odd and false otherwise
 	 *@param: input
 	*/
-	public static boolean validateInput(int updatedRounds){
-		if((updatedRounds % 2 == 0) || (updatedRounds <= 0)){
+	public static boolean validateInput(int maxRounds){
+		if((maxRounds % 2 == 0) || (maxRounds <= 0)){
 			return false;
 		}else{
 			return true;
 		}
 	}
-	/*
- 	*Executes the computation and all relevand methods for the game
-	*/
+
 	public static void main(String[]args){
-		Scanner keyBoard = new Scanner(System.in);		//Call keyboard for input
-		int select = 0;									//takes care of menu selection
+		Scanner keyBoard = new Scanner(System.in);	//Call keyboard for input
+		int select = 0;
 		int headsOrTails;								//Stores Menu selection input
 
 		while(select!= 2){
@@ -131,47 +113,58 @@ public class coinToss {
 			System.out.println("\n**********Instructions***********");
 			System.out.println("\n \t1. Enter 1 to start game");
 			System.out.println("\n \t2. Enter 2 to return to main Menu");
+			System.out.println("Select an option from the Menu");
 			
 			if(keyBoard.hasNextInt()){
 	        	select = keyBoard.nextInt();
 		    }else{
 		        System.out.println("Error!! Invalid input");
 		    }
-
+		    System.out.println("Testeee");
+		    
+			//select = keyBoard.nextInt();
+			//keyBoard.nextLine();
 			if(select == 1){
 				System.out.println("Enter an odd number to serve as the maximum number of rounds");	//prompt for number
-				totalRounds = keyBoard.nextInt();		//Store total rounds
-				updatedRounds = totalRounds;			//Copy total number of rounds to updatedRounds
+				totalRounds = keyBoard.nextInt();		//Store number in var
+				System.out.println("Total Rounds has: " + totalRounds);
+				maxRounds = totalRounds;				//Copy total number of rounds to update game
+				System.out.println("Total Rounds has: " + totalRounds);
+				System.out.println("Max Rounds has: " + maxRounds);
 
-				if(validateInput(updatedRounds)){
-					while(!(compWins > totalRounds/2) && !(userWins > totalRounds/2)){	//while there is no winner
+				if(validateInput(maxRounds)){
+					while(!(compWins > totalRounds/2) && !(userWins > totalRounds/2)){
+					//System.out.println("maxRounds is: " + maxRounds);	//print for testing
 					System.out.println("\n \t1. Choose '1' for heads or '2' for tails");	//prompt for input
 					headsOrTails = keyBoard.nextInt();		//scan for input
-			
+					//keyBoard.nextLine();
 					if(headsOrTails == 1){
-						System.out.println("\n \tYou selected heads");
+						System.out.println("You selected heads");
 					}else if(headsOrTails == 2){
-						System.out.println("\n \tYou selected Tails");
+						System.out.println("You selected Tails");
 					}else{
 						System.out.println("Error!!! Enter a Valid Option");
 					}
-					//Make computer throw an integer (1 or 2)
+					//MAke computer throw an integer - 1 or 2
 					int pcThrow = randomGen(1,2); 
-			        System.out.println("\n \tComputer has: " + pcThrow);
-			        int result = roundWinner(pcThrow, headsOrTails);	//check round winner
+			        System.out.println("Computer has: " + pcThrow);
+			        int result = roundWinner(pcThrow, headsOrTails);
 			        if(result == 0){
-			        	System.out.println("\n \tYou lost this round!");
+			        	System.out.println("You lost this round!");
 			        	compWins++;
-			        	updatedRounds = updatedRounds -1;	//Updates number of rounds left
+			        	maxRounds = maxRounds -1;	//Updates number of rounds left
 			        }else{
-			        	System.out.println("\n \tYou won this round!!!");
+			        	System.out.println("You won this round!!!");
 			        	userWins++;
-			        	updatedRounds = updatedRounds -1;	//Updates number of rounds left
+			        	maxRounds = maxRounds -1;	//Updates number of rounds left
 			        }
+			        System.out.println("Scoreboard's state is: " );
 			        System.out.println("\n \t**********Scoreboard State***********");
 					System.out.println("\n \tComputer: " + compWins);
 					System.out.println("\n \tUser: " + userWins);
-					System.out.println("\n \tNumber of rounds left: " + updatedRounds);
+					System.out.println("\n \tNumber of rounds left: " + maxRounds);
+					System.out.println("\n \tTotal Rounds has: " + totalRounds);
+					System.out.println("\n \tMax Rounds has: " + maxRounds);
 					}
 					//call function to compare winners
 					int gameW = gameWinner(compWins, userWins);
@@ -187,8 +180,10 @@ public class coinToss {
 					}
 					else{
 						//System.out.println("\n \t Testing Tie");
+						//compWins = userWins;
 					}
 					
+
 				}else{	
 					System.out.println("Error!!! Please enter an odd number");
 				}
@@ -200,9 +195,12 @@ public class coinToss {
 			}else{
 				System.out.println("Error!!! Enter a Valid Option");
 			}
-			//NEED TO MAKE SURE IT DECLARES WINNER RIGHT AFTER updatedRounds < updatedRounds/2
+			//NEED TO MAKE SURE IT DECLARES WINNER RIGHT AFTER MAXROUNDS < MAXROUNDS/2
 			System.out.println();		//Get some space
 		}//End of while
 		System.out.println("Should exit to Main Menu here!");
 	}//End of Main
 }
+
+//Must make sure computer does not throw if input is wrong-might need to add methods to check on each of these.
+//Basically handle all possible exceptions and throw only i
